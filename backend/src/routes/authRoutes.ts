@@ -36,7 +36,21 @@ router.post('/register', async (req: Request, res: Response): Promise<any> => {
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'test_secret', {
-      expiresIn: '1h',
+      expiresIn: '15m',
+    });
+
+    const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET || 'test_refresh_secret', {
+      expiresIn: '7d',
+    });
+
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
     res.status(201).json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
@@ -69,7 +83,21 @@ router.post('/login', async (req: Request, res: Response): Promise<any> => {
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'test_secret', {
-      expiresIn: '1h',
+      expiresIn: '15m',
+    });
+
+    const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET || 'test_refresh_secret', {
+      expiresIn: '7d',
+    });
+
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
     res.status(200).json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
@@ -99,6 +127,62 @@ router.get('/me', authenticate, async (req: AuthRequest, res: Response): Promise
   } catch (err: any) {
     console.error(err.message);
     res.status(500).send('Server error');
+  }
+});
+
+// Refresh token
+router.post('/refresh', async (req: Request, res: Response): Promise<any> => {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+    
+    if (!refreshToken) {
+      return res.status(401).json({ message: 'No refresh token provided' });
+    }
+
+    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET || 'test_refresh_secret') as any;
+    
+    const user = await User.findById(decoded.user.id);
+    
+    if (!user || user.refreshToken !== refreshToken) {
+      return res.status(401).json({ message: 'Invalid refresh token' });
+    }
+
+    const payload = {
+      user: {
+        id: user.id,
+        role: user.role
+      },
+    };
+
+    const newToken = jwt.sign(payload, process.env.JWT_SECRET || 'test_secret', {
+      expiresIn: '15m',
+    });
+
+    res.json({ token: newToken });
+  } catch (err) {
+    res.status(401).json({ message: 'Invalid or expired refresh token' });
+  }
+});
+
+// Logout
+router.post('/logout', async (req: Request, res: Response): Promise<any> => {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+    if (refreshToken) {
+      const user = await User.findOne({ refreshToken });
+      if (user) {
+        user.refreshToken = undefined;
+        await user.save();
+      }
+    }
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
+    });
+    res.json({ message: 'Logged out successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

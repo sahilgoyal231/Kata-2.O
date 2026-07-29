@@ -34,7 +34,7 @@
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-brand;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-incubyte-teal to-[#027063];
   }
   
   .bg-gradient-brand {

@@ -2,6 +2,7 @@ import { Car, Fuel, Zap, Calendar, Tag, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import confetti from 'canvas-confetti';
+import api from '../utils/axiosInstance';
 
 export interface Vehicle {
   _id: string;
@@ -26,6 +27,7 @@ interface VehicleCardProps {
 
 const VehicleCard = ({ vehicle, onPurchaseSuccess }: VehicleCardProps) => {
   const [isPurchasing, setIsPurchasing] = useState(false);
+  const isAdmin = typeof window !== 'undefined' ? localStorage.getItem('role') === 'admin' : false;
 
   const handlePurchase = async () => {
     try {
@@ -37,20 +39,8 @@ const VehicleCard = ({ vehicle, onPurchaseSuccess }: VehicleCardProps) => {
         return;
       }
       
-      const response = await fetch(`/api/vehicles/${vehicle._id}/purchase`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ amount: 1 })
-      });
-      
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to purchase vehicle');
-      }
+      const response = await api.post(`/api/vehicles/${vehicle._id}/purchase`, { amount: 1 });
+      const data = response.data;
       
       toast.success(`🎉 🏎️ VROOM! You just bought a ${vehicle.make} ${vehicle.model}!`);
       
@@ -66,7 +56,8 @@ const VehicleCard = ({ vehicle, onPurchaseSuccess }: VehicleCardProps) => {
         onPurchaseSuccess(vehicle._id, data.vehicle.quantity);
       }
     } catch (err: any) {
-      toast.error(err.message || 'Purchase failed.');
+      const msg = err.response?.data?.message || err.message;
+      toast.error(msg || 'Purchase failed.');
     } finally {
       setIsPurchasing(false);
     }
@@ -130,23 +121,25 @@ const VehicleCard = ({ vehicle, onPurchaseSuccess }: VehicleCardProps) => {
           </div>
         </div>
 
-        <button 
-          onClick={handlePurchase}
-          className="w-full relative overflow-hidden bg-gradient-brand font-bold py-3.5 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group/btn disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
-          disabled={vehicle.quantity === 0 || isPurchasing}
-        >
-          {isPurchasing ? (
-            <Loader2 className="w-4 h-4 animate-spin relative z-10" />
-          ) : (
-            <Tag className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300 relative z-10" />
-          )}
-          
-          <span className="relative z-10 tracking-wide">
-            {isPurchasing 
-              ? 'Processing...' 
-              : (vehicle.quantity > 0 ? 'Purchase Vehicle' : 'Unavailable')}
-          </span>
-        </button>
+        {!isAdmin && (
+          <button 
+            onClick={handlePurchase}
+            className="w-full relative overflow-hidden bg-gradient-brand font-bold py-3.5 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group/btn disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
+            disabled={vehicle.quantity === 0 || isPurchasing}
+          >
+            {isPurchasing ? (
+              <Loader2 className="w-4 h-4 animate-spin relative z-10" />
+            ) : (
+              <Tag className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300 relative z-10" />
+            )}
+            
+            <span className="relative z-10 tracking-wide">
+              {isPurchasing 
+                ? 'Processing...' 
+                : (vehicle.quantity > 0 ? 'Purchase Vehicle' : 'Unavailable')}
+            </span>
+          </button>
+        )}
       </div>
     </div>
   );

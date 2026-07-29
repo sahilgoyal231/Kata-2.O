@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowRight, Lock, Mail } from 'lucide-react';
 import { useLocation } from 'wouter';
 import toast from 'react-hot-toast';
+import api from '../utils/axiosInstance';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,23 +14,9 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      const response = await api.post('/api/auth/login', { email, password });
       
-      let data = {};
-      const text = await response.text();
-      try {
-        data = text ? JSON.parse(text) : {};
-      } catch (err) {
-        throw new Error('Server returned an invalid response. Is the backend running?');
-      }
-      
-      if (!response.ok) {
-        throw new Error((data as any).message || 'Login failed');
-      }
+      const data = response.data;
 
       localStorage.setItem('token', (data as any).token);
       if ((data as any).user?.role) {
@@ -43,7 +30,8 @@ const Login = () => {
         setLocation('/dashboard');
       }
     } catch (err: any) {
-      toast.error(err.message);
+      const msg = err.response?.data?.message || err.message;
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }

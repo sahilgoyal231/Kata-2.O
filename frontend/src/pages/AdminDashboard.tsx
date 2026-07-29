@@ -3,6 +3,7 @@ import { useLocation } from 'wouter';
 import { Plus, Pencil, Trash2, X, Loader2, RefreshCw, LogOut } from 'lucide-react';
 import toast from 'react-hot-toast';
 import type { Vehicle } from '../components/VehicleCard';
+import api from '../utils/axiosInstance';
 
 const initialFormState = {
   make: '',
@@ -41,22 +42,24 @@ const AdminDashboard = () => {
   const fetchVehicles = async () => {
     setIsLoading(true);
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/vehicles', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const data = await response.json();
+      const response = await api.get('/api/vehicles');
+      const data = response.data;
       
-      if (!response.ok) throw new Error(data.message || 'Failed to fetch vehicles');
       setVehicles(Array.isArray(data) ? data : []);
     } catch (err: any) {
-      toast.error(err.message);
+      const msg = err.response?.data?.message || err.message;
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await api.post('/api/auth/logout');
+    } catch (err) {
+      console.error('Logout failed on backend', err);
+    }
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     toast.success('Admin session terminated securely');
@@ -68,36 +71,24 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this vehicle?')) return;
     
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`/api/vehicles/${id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || 'Failed to delete vehicle');
-      }
+      await api.delete(`/api/vehicles/${id}`);
       
       toast.success('Vehicle deleted successfully');
       setVehicles(vehicles.filter(v => v._id !== id));
     } catch (err: any) {
-      toast.error(err.message);
+      const msg = err.response?.data?.message || err.message;
+      toast.error(msg);
     }
   };
 
   const handleRestock = async (id: string) => {
     try {
-      const response = await fetch(`/api/vehicles/${id}/restock`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.message || 'Failed to restock vehicle');
+      await api.post(`/api/vehicles/${id}/restock`);
       toast.success('Restock successful (+1)');
       fetchVehicles();
     } catch (err: any) {
-      toast.error(err.message);
+      const msg = err.response?.data?.message || err.message;
+      toast.error(msg);
     }
   };
 
@@ -117,27 +108,20 @@ const AdminDashboard = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const token = localStorage.getItem('token');
       const url = editingId ? `/api/vehicles/${editingId}` : '/api/vehicles';
-      const method = editingId ? 'PUT' : 'POST';
-
-      const response = await fetch(url, {
-        method,
-        headers: { 
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.message || 'Operation failed');
+      
+      if (editingId) {
+        await api.put(url, formData);
+      } else {
+        await api.post(url, formData);
+      }
 
       toast.success(`Vehicle ${editingId ? 'updated' : 'added'} successfully!`);
       setIsModalOpen(false);
       fetchVehicles(); // Refresh the list
     } catch (err: any) {
-      toast.error(err.message);
+      const msg = err.response?.data?.message || err.message;
+      toast.error(msg);
     } finally {
       setIsSubmitting(false);
     }

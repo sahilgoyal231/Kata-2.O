@@ -47,7 +47,7 @@ describe('Inventory Endpoints', () => {
 
   beforeEach(async () => {
     await Vehicle.deleteMany({});
-    const vehicle = await Vehicle.create({ make: 'Tesla', model: 'Model 3', category: 'Sedan', price: 40000, quantity: 2 });
+    const vehicle = await Vehicle.create({ make: 'Tesla', model: 'Model 3', category: 'Sedan', price: 40000, quantity: 2, year: 2024, powertrain: 'Electric', imageUrl: 'https://test.com/tesla.jpg' });
     testVehicleId = vehicle._id.toString();
   });
 

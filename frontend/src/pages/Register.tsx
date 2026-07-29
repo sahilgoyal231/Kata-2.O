@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowRight, Lock, Mail, User } from 'lucide-react';
 import { useLocation } from 'wouter';
 import toast from 'react-hot-toast';
+import api from '../utils/axiosInstance';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -14,23 +15,9 @@ const Register = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password })
-      });
+      const response = await api.post('/api/auth/register', { name, email, password });
       
-      let data = {};
-      const text = await response.text();
-      try {
-        data = text ? JSON.parse(text) : {};
-      } catch (err) {
-        throw new Error('Server returned an invalid response. Is the backend running?');
-      }
-      
-      if (!response.ok) {
-        throw new Error((data as any).message || 'Registration failed');
-      }
+      const data = response.data;
 
       localStorage.setItem('token', (data as any).token);
       if ((data as any).user?.role) {
@@ -44,7 +31,8 @@ const Register = () => {
         setLocation('/dashboard');
       }
     } catch (err: any) {
-      toast.error(err.message);
+      const msg = err.response?.data?.message || err.message;
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }

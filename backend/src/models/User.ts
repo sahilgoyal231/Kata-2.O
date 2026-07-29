@@ -19,6 +19,9 @@ const userSchema = new mongoose.Schema({
     enum: ['customer', 'admin'],
     default: 'customer',
   },
+  refreshToken: {
+    type: String,
+  },
   purchaseHistory: [{
     vehicleId: mongoose.Schema.Types.ObjectId,
     make: String,

@@ -63,6 +63,9 @@ describe('Vehicle Endpoints', () => {
           category: 'Sedan',
           price: 25000,
           quantity: 5,
+          year: 2024,
+          powertrain: 'Gasoline',
+          imageUrl: 'https://test.com/toyota.jpg'
         });
 
       expect(res.status).toBe(201);
@@ -80,6 +83,9 @@ describe('Vehicle Endpoints', () => {
           category: 'Sedan',
           price: 25000,
           quantity: 5,
+          year: 2024,
+          powertrain: 'Gasoline',
+          imageUrl: 'https://test.com/toyota.jpg'
         });
 
       expect(res.status).toBe(403);
@@ -88,8 +94,8 @@ describe('Vehicle Endpoints', () => {
 
   describe('GET /api/vehicles', () => {
     it('should list all vehicles', async () => {
-      await Vehicle.create({ make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3 });
-      await Vehicle.create({ make: 'Ford', model: 'Mustang', category: 'Coupe', price: 35000, quantity: 2 });
+      await Vehicle.create({ make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3, year: 2024, powertrain: 'Gasoline', imageUrl: 'test.jpg' });
+      await Vehicle.create({ make: 'Ford', model: 'Mustang', category: 'Coupe', price: 35000, quantity: 2, year: 2023, powertrain: 'Gasoline', imageUrl: 'test2.jpg' });
 
       const res = await request(app)
         .get('/api/vehicles')
@@ -103,9 +109,9 @@ describe('Vehicle Endpoints', () => {
   describe('GET /api/vehicles/search', () => {
     beforeEach(async () => {
       await Vehicle.create([
-        { make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3 },
-        { make: 'Ford', model: 'Mustang', category: 'Coupe', price: 35000, quantity: 2 },
-        { make: 'Honda', model: 'CR-V', category: 'SUV', price: 28000, quantity: 4 },
+        { make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3, year: 2024, powertrain: 'Gasoline', imageUrl: 'test.jpg' },
+        { make: 'Ford', model: 'Mustang', category: 'Coupe', price: 35000, quantity: 2, year: 2023, powertrain: 'Gasoline', imageUrl: 'test2.jpg' },
+        { make: 'Honda', model: 'CR-V', category: 'SUV', price: 28000, quantity: 4, year: 2024, powertrain: 'Hybrid', imageUrl: 'test3.jpg' },
       ]);
     });
 
@@ -131,7 +137,7 @@ describe('Vehicle Endpoints', () => {
 
   describe('PUT /api/vehicles/:id', () => {
     it('should allow admin to update a vehicle', async () => {
-      const vehicle = await Vehicle.create({ make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3 });
+      const vehicle = await Vehicle.create({ make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3, year: 2024, powertrain: 'Gasoline', imageUrl: 'test.jpg' });
 
       const res = await request(app)
         .put(`/api/vehicles/${vehicle._id}`)
@@ -145,7 +151,7 @@ describe('Vehicle Endpoints', () => {
 
   describe('DELETE /api/vehicles/:id', () => {
     it('should allow admin to delete a vehicle', async () => {
-      const vehicle = await Vehicle.create({ make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3 });
+      const vehicle = await Vehicle.create({ make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3, year: 2024, powertrain: 'Gasoline', imageUrl: 'test.jpg' });
 
       const res = await request(app)
         .delete(`/api/vehicles/${vehicle._id}`)

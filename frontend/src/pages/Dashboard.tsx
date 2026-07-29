@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Search, SlidersHorizontal, Loader2 } from 'lucide-react';
 import VehicleCard, { type Vehicle } from '../components/VehicleCard';
 import { useLocation } from 'wouter';
+import api from '../utils/axiosInstance';
 
 const Dashboard = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -25,23 +26,8 @@ const Dashboard = () => {
           return;
         }
 
-        const response = await fetch('/api/vehicles', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-        let data;
-        const text = await response.text();
-        try {
-          data = text ? JSON.parse(text) : [];
-        } catch (err) {
-          throw new Error('Server returned an invalid response. Is the backend running?');
-        }
-
-        if (!response.ok) {
-          throw new Error(data.message || 'Failed to fetch inventory');
-        }
+        const response = await api.get('/api/vehicles');
+        const data = response.data;
 
         setVehicles(Array.isArray(data) ? data : []);
       } catch (err: any) {

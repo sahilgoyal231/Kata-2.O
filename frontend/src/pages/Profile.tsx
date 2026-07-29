@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { LogOut, User as UserIcon, Calendar, DollarSign, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import api from '../utils/axiosInstance';
 
 interface Purchase {
   _id: string;
@@ -38,16 +39,12 @@ const Profile = () => {
         return;
       }
 
-      const response = await fetch('/api/auth/me', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const data = await response.json();
-
-      if (!response.ok) throw new Error(data.message || 'Failed to fetch profile');
-      setProfile(data);
+      const response = await api.get('/api/auth/me');
+      setProfile(response.data);
     } catch (err: any) {
-      toast.error(err.message);
-      if (err.message === 'Unauthorized') {
+      const msg = err.response?.data?.message || err.message;
+      toast.error(msg);
+      if (err.response?.status === 401 || msg === 'Unauthorized') {
         handleLogout();
       }
     } finally {
@@ -55,7 +52,12 @@ const Profile = () => {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await api.post('/api/auth/logout');
+    } catch (err) {
+      console.error('Logout failed on backend', err);
+    }
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     toast.success('Successfully logged out');
