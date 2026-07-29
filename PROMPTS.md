@@ -19,3 +19,7 @@ This file contains the prompts and interactions used to build the Car Dealership
 ## Step 3: Backend Vehicles API
 - **Prompt (User):** "Proceed to the next step and make sure not to forget the context i had given you at the very start"
 - **AI Action:** Created `Vehicle` model, wrote test suite for vehicle CRUD endpoints and search/filter. Implemented routes and connected them to the Express app.
+
+## Step 4: Backend Inventory Management API
+- **Prompt (User):** "done proceed to the backend inventory management"
+- **AI Action:** Created `inventory.test.ts` for purchase and restock endpoints. Added `/purchase` (Customer/Admin) and `/restock` (Admin) logic to `vehicleRoutes.ts`, correctly handling stock quantity updates.
