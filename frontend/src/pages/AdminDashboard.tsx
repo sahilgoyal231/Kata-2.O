@@ -86,6 +86,21 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleRestock = async (id: string) => {
+    try {
+      const response = await fetch(`/api/vehicles/${id}/restock`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Failed to restock vehicle');
+      toast.success('Restock successful (+1)');
+      fetchVehicles();
+    } catch (err: any) {
+      toast.error(err.message);
+    }
+  };
+
   const handleEdit = (vehicle: Vehicle) => {
     setEditingId(vehicle._id);
     setFormData({ ...vehicle });
@@ -203,10 +218,13 @@ const AdminDashboard = () => {
                     </td>
                     <td className="p-5">
                       <div className="flex justify-end gap-3">
-                        <button onClick={() => handleEdit(v)} className="p-2 bg-gray-100 hover:bg-incubyte-teal hover:text-white text-gray-500 rounded-lg transition-colors border border-transparent">
+                        <button onClick={() => handleRestock(v._id)} title="Restock (+1)" className="p-2 bg-emerald-50 hover:bg-emerald-500 hover:text-white text-emerald-600 rounded-lg transition-colors border border-transparent">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                        </button>
+                        <button onClick={() => handleEdit(v)} title="Edit" className="p-2 bg-gray-100 hover:bg-incubyte-teal hover:text-white text-gray-500 rounded-lg transition-colors border border-transparent">
                           <Pencil className="w-4 h-4" />
                         </button>
-                        <button onClick={() => handleDelete(v._id)} className="p-2 bg-gray-100 hover:bg-red-500 hover:text-white text-gray-500 rounded-lg transition-colors border border-transparent">
+                        <button onClick={() => handleDelete(v._id)} title="Delete" className="p-2 bg-gray-100 hover:bg-red-500 hover:text-white text-gray-500 rounded-lg transition-colors border border-transparent">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>

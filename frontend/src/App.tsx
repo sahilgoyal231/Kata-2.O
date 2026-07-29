@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch, Link, useLocation } from 'wouter';
+import { Route, Switch, Link } from 'wouter';
 import { Toaster } from 'react-hot-toast';
 import { User } from 'lucide-react';
 import LandingPage from './pages/LandingPage';
@@ -10,7 +10,6 @@ import AdminDashboard from './pages/AdminDashboard';
 import Profile from './pages/Profile';
 
 function App() {
-  const [location, setLocation] = useLocation();
   const [token, setToken] = useState(typeof window !== 'undefined' ? localStorage.getItem('token') : null);
   const [role, setRole] = useState(typeof window !== 'undefined' ? localStorage.getItem('role') : null);
 
@@ -26,12 +25,7 @@ function App() {
   const isLoggedIn = !!token;
   const isAdmin = role === 'admin';
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    window.dispatchEvent(new Event('auth-change'));
-    setLocation('/');
-  };
+
 
   return (
     <div className="min-h-screen bg-[#E8F3F1] bg-dot-pattern text-[#202020] font-sans selection:bg-incubyte-teal/30 relative overflow-hidden">
