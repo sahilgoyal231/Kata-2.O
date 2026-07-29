@@ -1,7 +1,9 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import { User } from '../models/User';
+import { authenticate, AuthRequest } from '../middleware/auth';
 
 const router = Router();
 
@@ -71,6 +73,29 @@ router.post('/login', async (req: Request, res: Response): Promise<any> => {
     });
 
     res.status(200).json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
+  } catch (err: any) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// Get current user profile
+router.get('/me', authenticate, async (req: AuthRequest, res: Response): Promise<any> => {
+  try {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    
+    // Return user without password, but including purchaseHistory
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    // Generate Avatar URL using unavatar.io (resolves Gmail/Google profiles automatically)
+    const avatarUrl = `https://unavatar.io/${encodeURIComponent(user.email.trim().toLowerCase())}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=014D43&color=fff`;
+    
+    res.json({ ...user.toObject(), avatarUrl });
   } catch (err: any) {
     console.error(err.message);
     res.status(500).send('Server error');

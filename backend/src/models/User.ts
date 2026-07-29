@@ -19,6 +19,14 @@ const userSchema = new mongoose.Schema({
     enum: ['customer', 'admin'],
     default: 'customer',
   },
+  purchaseHistory: [{
+    vehicleId: mongoose.Schema.Types.ObjectId,
+    make: String,
+    model: String,
+    price: Number,
+    imageUrl: String,
+    purchaseDate: { type: Date, default: Date.now }
+  }]
 });
 
 export const User = mongoose.model('User', userSchema);

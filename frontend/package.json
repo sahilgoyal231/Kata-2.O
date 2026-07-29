@@ -10,14 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "canvas-confetti": "^1.9.4",
     "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-hot-toast": "latest",
     "wouter": "latest"
   },
   "devDependencies": {
     "@eslint/js": "latest",
     "@tailwindcss/vite": "latest",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",

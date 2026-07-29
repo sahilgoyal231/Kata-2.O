@@ -1,5 +1,6 @@
 import { Router, Response } from 'express';
 import { Vehicle } from '../models/Vehicle';
+import { User } from '../models/User';
 import { authenticate, authorizeAdmin, AuthRequest } from '../middleware/auth';
 
 const router = Router();
@@ -51,7 +52,7 @@ router.post('/', authenticate, authorizeAdmin, async (req: AuthRequest, res: Res
 // Update a vehicle (Admin)
 router.put('/:id', authenticate, authorizeAdmin, async (req: AuthRequest, res: Response): Promise<any> => {
   try {
-    const updatedVehicle = await Vehicle.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedVehicle = await Vehicle.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after' });
     if (!updatedVehicle) return res.status(404).json({ message: 'Vehicle not found' });
     res.json(updatedVehicle);
   } catch (err: any) {
@@ -81,6 +82,22 @@ router.post('/:id/purchase', authenticate, async (req: AuthRequest, res: Respons
     
     vehicle.quantity -= amount;
     await vehicle.save();
+    
+    // Record purchase in User's history
+    if (req.user && req.user.id) {
+      await User.findByIdAndUpdate(req.user.id, {
+        $push: {
+          purchaseHistory: {
+            vehicleId: vehicle._id,
+            make: vehicle.make,
+            model: vehicle.model,
+            price: vehicle.price,
+            imageUrl: vehicle.imageUrl,
+            purchaseDate: new Date()
+          }
+        }
+      });
+    }
     
     res.json({ message: 'Purchase successful', vehicle });
   } catch (err: any) {

@@ -27,3 +27,9 @@ This file contains the prompts and interactions used to build the Car Dealership
 ## Step 5: Frontend Setup & Landing Page
 - **Prompt (User):** "proceed to the frontnd part"
 - **AI Action:** Transitioned to frontend architecture, initiating Vite + React boilerplate.
+- **Prompt (User):** "landing page is not that impressive, i want you to add some more context about the application in it and also make sure to use the web images for the icons or same, and also the lgin and register page are not available for now, so work on that as well, and in npm install, there are still vulnerabilitites so look into thse as well and resolve them before proceeding to any other thing"
+- **AI Action:** Replaced `react-router-dom` completely with `wouter` to achieve 0 high-severity vulnerabilities. Upgraded `LandingPage.tsx` with high-resolution Unsplash imagery and context. Implemented fully designed `Login.tsx` and `Register.tsx` routes.
+
+## Step 6: Frontend Dashboard & Search UI
+- **Prompt (User):** "this is all fine for now, now i want you to proceed to te next step and ask for the required env variables to make it working seamlessly"
+- **AI Action:** Transitioning to Step 6 and setting up `.env` instructions.

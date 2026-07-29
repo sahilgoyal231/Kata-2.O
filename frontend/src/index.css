@@ -1,19 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-base: #0f172a;
-  --color-dark-surface: #1e293b;
-  --color-brand-cyan: #06b6d4;
-  --color-brand-green: #10b981;
-  --color-brand-teal: #14b8a6;
+  --color-incubyte-teal: #014D43;
+  --color-incubyte-dark: #003642;
+  --color-incubyte-bg: #E8F3F1;
   
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Fraunces', serif;
+  --font-sans: '"Inclusive Sans"', sans-serif;
 }
 
 @layer base {
   :root {
-    --background: var(--color-dark-base);
-    --foreground: #f8fafc;
+    --background: var(--color-incubyte-bg);
+    --foreground: #202020;
   }
   
   body {
@@ -27,18 +26,38 @@
 
 @layer utilities {
   .glass {
-    @apply bg-slate-900/40 backdrop-blur-md border border-slate-700/50 shadow-xl;
+    @apply bg-white/90 backdrop-blur-2xl border-b border-white/80 shadow-[0_4px_24px_rgba(0,0,0,0.04)];
   }
   
   .glass-card {
-    @apply bg-slate-800/60 backdrop-blur-lg border border-slate-600/30 shadow-2xl rounded-2xl;
+    @apply bg-white/85 backdrop-blur-2xl rounded-3xl border border-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.05)];
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-emerald-400;
+    @apply bg-clip-text text-transparent bg-gradient-brand;
   }
   
   .bg-gradient-brand {
-    @apply bg-gradient-to-br from-cyan-600 via-teal-600 to-emerald-600;
+    @apply bg-gradient-to-r from-incubyte-teal to-[#027063] hover:from-incubyte-dark hover:to-incubyte-teal transition-all text-white shadow-[0_0_20px_rgba(1,77,67,0.2)] hover:shadow-[0_0_30px_rgba(1,77,67,0.35)];
   }
+
+  .bg-dot-pattern {
+    background-image: radial-gradient(rgba(1, 77, 67, 0.2) 1.5px, transparent 1.5px);
+    background-size: 32px 32px;
+  }
+}
+
+@keyframes float {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(40px, -60px) scale(1.05); }
+  66% { transform: translate(-30px, 30px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-float-slow {
+  animation: float 20s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: float 25s ease-in-out infinite reverse;
 }
