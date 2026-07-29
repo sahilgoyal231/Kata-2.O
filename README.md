@@ -15,17 +15,21 @@ A full-stack web application designed for car dealerships to manage their invent
 
 ## Screenshots
 
-*(Please replace these placeholders with actual screenshots of your running application before submitting!)*
+### Landing Page
+![Landing Page 1](./docs/screenshots/landingPage1.png)
+![Landing Page 2](./docs/screenshots/landingPage2.png)
 
-### Login Screen
+### Authentication
 ![Login Screen](./docs/screenshots/login.png)
+![Register Screen](./docs/screenshots/register.png)
 
-### Customer Dashboard
-![Customer Dashboard](./docs/screenshots/dashboard.png)
+### Customer Experience
+![Customer Dashboard](./docs/screenshots/customerDashboard.png)
 
 ### Admin Inventory Manager
-![Admin Dashboard](./docs/screenshots/admin.png)
-
+![Admin Dashboard](./docs/screenshots/adminDashboard.png)
+![Admin Capabilities 1](./docs/screenshots/adminPower1.png)
+![Admin Capabilities 2](./docs/screenshots/adminPower2.png)
 ## Setup Instructions
 
 ### Backend Setup
