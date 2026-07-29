@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '', // Uses the same domain/port as the frontend, Vite proxy handles /api
+  baseURL: import.meta.env.VITE_API_URL || '', // Points to Render backend in production, or uses Vite proxy locally
   withCredentials: true, // Important for sending/receiving HttpOnly cookies
 });
 
@@ -27,7 +27,8 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const { data } = await axios.post('/api/auth/refresh', {}, { withCredentials: true });
+        const baseURL = import.meta.env.VITE_API_URL || '';
+        const { data } = await axios.post(`${baseURL}/api/auth/refresh`, {}, { withCredentials: true });
         
         // Save new access token
         localStorage.setItem('token', data.token);
