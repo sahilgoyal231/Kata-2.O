@@ -23,3 +23,7 @@ This file contains the prompts and interactions used to build the Car Dealership
 ## Step 4: Backend Inventory Management API
 - **Prompt (User):** "done proceed to the backend inventory management"
 - **AI Action:** Created `inventory.test.ts` for purchase and restock endpoints. Added `/purchase` (Customer/Admin) and `/restock` (Admin) logic to `vehicleRoutes.ts`, correctly handling stock quantity updates.
+
+## Step 5: Frontend Setup & Landing Page
+- **Prompt (User):** "proceed to the frontnd part"
+- **AI Action:** Transitioned to frontend architecture, initiating Vite + React boilerplate.
