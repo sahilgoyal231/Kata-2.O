@@ -1,143 +1,28 @@
+ RUN  v4.1.10 /Users/goyal/Desktop/Kata 2.O/backend
+      Coverage enabled with v8
 
-> backend@1.0.0 test
-> vitest run
-
-
-[1m[30m[46m RUN [49m[39m[22m [36mv4.1.10 [39m[90m/Users/goyal/Desktop/Kata 2.O/backend[39m
-
-[90mstderr[2m | src/tests/inventory.test.ts[2m > [22m[2mInventory Endpoints
-[22m[39mStarting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
- Error: listen EPERM: operation not permitted 0.0.0.0
-[90m    at Server.setupListenHandle [as _listen2] (node:net:1918:21)[39m
-[90m    at listenInCluster (node:net:1997:12)[39m
-[90m    at Server.listen (node:net:2102:7)[39m
-    at [90m/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/util/getport/index.js:108:16
-    at new Promise (<anonymous>)
-    at tryPort [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/util/getport/index.js:96:12[90m)[39m
-    at getFreePort [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/util/getport/index.js:59:33[90m)[39m
-    at MongoMemoryServer.getNewPort [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/MongoMemoryServer.js:136:57[90m)[39m
-    at MongoMemoryServer.getStartOptions [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/MongoMemoryServer.js:171:31[90m)[39m
-    at MongoMemoryServer._startUpInstance [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/MongoMemoryServer.js:238:53[90m)[39m {
-  code: [32m'EPERM'[39m,
-  errno: [33m-1[39m,
-  syscall: [32m'listen'[39m,
-  address: [32m'0.0.0.0'[39m
-}
-
-[90mstderr[2m | src/tests/auth.test.ts[2m > [22m[2mAuth Endpoints
-[22m[39mStarting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
- Error: listen EPERM: operation not permitted 0.0.0.0
-[90m    at Server.setupListenHandle [as _listen2] (node:net:1918:21)[39m
-[90m    at listenInCluster (node:net:1997:12)[39m
-[90m    at Server.listen (node:net:2102:7)[39m
-    at [90m/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/util/getport/index.js:108:16
-    at new Promise (<anonymous>)
-    at tryPort [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/util/getport/index.js:96:12[90m)[39m
-    at getFreePort [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/util/getport/index.js:59:33[90m)[39m
-    at MongoMemoryServer.getNewPort [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/MongoMemoryServer.js:136:57[90m)[39m
-    at MongoMemoryServer.getStartOptions [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/MongoMemoryServer.js:171:31[90m)[39m
-    at MongoMemoryServer._startUpInstance [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/MongoMemoryServer.js:238:53[90m)[39m {
-  code: [32m'EPERM'[39m,
-  errno: [33m-1[39m,
-  syscall: [32m'listen'[39m,
-  address: [32m'0.0.0.0'[39m
-}
-
-[90mstderr[2m | src/tests/vehicle.test.ts[2m > [22m[2mVehicle Endpoints
-[22m[39mStarting the MongoMemoryServer Instance failed, enable debug log for more information. Error:
- Error: listen EPERM: operation not permitted 0.0.0.0
-[90m    at Server.setupListenHandle [as _listen2] (node:net:1918:21)[39m
-[90m    at listenInCluster (node:net:1997:12)[39m
-[90m    at Server.listen (node:net:2102:7)[39m
-    at [90m/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/util/getport/index.js:108:16
-    at new Promise (<anonymous>)
-    at tryPort [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/util/getport/index.js:96:12[90m)[39m
-    at getFreePort [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/util/getport/index.js:59:33[90m)[39m
-    at MongoMemoryServer.getNewPort [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/MongoMemoryServer.js:136:57[90m)[39m
-    at MongoMemoryServer.getStartOptions [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/MongoMemoryServer.js:171:31[90m)[39m
-    at MongoMemoryServer._startUpInstance [90m(/Users/goyal/Desktop/Kata 2.O/backend/[39mnode_modules/[4mmongodb-memory-server-core[24m/lib/MongoMemoryServer.js:238:53[90m)[39m {
-  code: [32m'EPERM'[39m,
-  errno: [33m-1[39m,
-  syscall: [32m'listen'[39m,
-  address: [32m'0.0.0.0'[39m
-}
-
- [31m❯[39m src/tests/auth.test.ts [2m([22m[2m4 tests[22m[2m | [22m[33m4 skipped[39m[2m)[22m[33m 10008[2mms[22m[39m
-       [2m[90m↓[39m[22m should register a new user successfully
-       [2m[90m↓[39m[22m should not allow duplicate emails
-       [2m[90m↓[39m[22m should login successfully with valid credentials
-       [2m[90m↓[39m[22m should fail to login with incorrect password
- [31m❯[39m src/tests/inventory.test.ts [2m([22m[2m4 tests[22m[2m | [22m[33m4 skipped[39m[2m)[22m[33m 10009[2mms[22m[39m
-       [2m[90m↓[39m[22m should allow a customer to purchase a vehicle and decrease quantity
-       [2m[90m↓[39m[22m should prevent purchase if quantity is insufficient
-       [2m[90m↓[39m[22m should allow an admin to restock a vehicle and increase quantity
-       [2m[90m↓[39m[22m should prevent a customer from restocking a vehicle
- [31m❯[39m src/tests/vehicle.test.ts [2m([22m[2m7 tests[22m[2m | [22m[33m7 skipped[39m[2m)[22m[33m 10009[2mms[22m[39m
-       [2m[90m↓[39m[22m should allow admin to create a vehicle
-       [2m[90m↓[39m[22m should not allow customer to create a vehicle
-       [2m[90m↓[39m[22m should list all vehicles
-       [2m[90m↓[39m[22m should search vehicles by make
-       [2m[90m↓[39m[22m should search vehicles by max price
-       [2m[90m↓[39m[22m should allow admin to update a vehicle
-       [2m[90m↓[39m[22m should allow admin to delete a vehicle
-
-[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 3 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
-
-[41m[1m FAIL [22m[49m src/tests/auth.test.ts[2m > [22mAuth Endpoints
-[41m[1m FAIL [22m[49m src/tests/inventory.test.ts[2m > [22mInventory Endpoints
-[41m[1m FAIL [22m[49m src/tests/vehicle.test.ts[2m > [22mVehicle Endpoints
-[31m[1mError[22m: listen EPERM: operation not permitted 0.0.0.0[39m
-[90m [2m❯[22m node_modules/mongodb-memory-server-core/src/util/getport/index.ts:[2m137:11[22m[39m
-[90m [2m❯[22m tryPort node_modules/mongodb-memory-server-core/src/util/getport/index.ts:[2m122:9[22m[39m
-[90m [2m❯[22m getFreePort node_modules/mongodb-memory-server-core/src/util/getport/index.ts:[2m73:28[22m[39m
-[90m [2m❯[22m MongoMemoryServer.getNewPort node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:[2m401:38[22m[39m
-[90m [2m❯[22m MongoMemoryServer.getStartOptions node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:[2m447:24[22m[39m
-[90m [2m❯[22m MongoMemoryServer._startUpInstance node_modules/mongodb-memory-server-core/src/MongoMemoryServer.ts:[2m529:48[22m[39m
-
-[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯[22m[39m
-
-[41m[1m FAIL [22m[49m src/tests/auth.test.ts[2m > [22mAuth Endpoints
-[31m[1mError[22m: Hook timed out in 10000ms.
-If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".[39m
-[36m [2m❯[22m src/tests/auth.test.ts:[2m17:3[22m[39m
-    [90m 15|[39m   })[33m;[39m
-    [90m 16|[39m
-    [90m 17|[39m   [34mafterAll[39m([35masync[39m () [33m=>[39m {
-    [90m   |[39m   [31m^[39m
-    [90m 18|[39m     [35mawait[39m mongoose[33m.[39mconnection[33m.[39m[34mdropDatabase[39m()[33m;[39m
-    [90m 19|[39m     [35mawait[39m mongoose[33m.[39mconnection[33m.[39m[34mclose[39m()[33m;[39m
-
-[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯[22m[39m
-
-[41m[1m FAIL [22m[49m src/tests/inventory.test.ts[2m > [22mInventory Endpoints
-[31m[1mError[22m: Hook timed out in 10000ms.
-If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".[39m
-[36m [2m❯[22m src/tests/inventory.test.ts:[2m42:3[22m[39m
-    [90m 40|[39m   })[33m;[39m
-    [90m 41|[39m
-    [90m 42|[39m   [34mafterAll[39m([35masync[39m () [33m=>[39m {
-    [90m   |[39m   [31m^[39m
-    [90m 43|[39m     [35mawait[39m mongoose[33m.[39mconnection[33m.[39m[34mdropDatabase[39m()[33m;[39m
-    [90m 44|[39m     [35mawait[39m mongoose[33m.[39mconnection[33m.[39m[34mclose[39m()[33m;[39m
-
-[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯[22m[39m
-
-[41m[1m FAIL [22m[49m src/tests/vehicle.test.ts[2m > [22mVehicle Endpoints
-[31m[1mError[22m: Hook timed out in 10000ms.
-If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".[39m
-[36m [2m❯[22m src/tests/vehicle.test.ts:[2m45:3[22m[39m
-    [90m 43|[39m   })[33m;[39m
-    [90m 44|[39m
-    [90m 45|[39m   [34mafterAll[39m([35masync[39m () [33m=>[39m {
-    [90m   |[39m   [31m^[39m
-    [90m 46|[39m     [35mawait[39m mongoose[33m.[39mconnection[33m.[39m[34mdropDatabase[39m()[33m;[39m
-    [90m 47|[39m     [35mawait[39m mongoose[33m.[39mconnection[33m.[39m[34mclose[39m()[33m;[39m
-
-[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯[22m[39m
-
-
-[2m Test Files [22m [1m[31m3 failed[39m[22m[90m (3)[39m
-[2m      Tests [22m [33m15 skipped[39m[90m (15)[39m
-[2m   Start at [22m 12:45:39
-[2m   Duration [22m 10.34s[2m (transform 92ms, setup 0ms, import 687ms, tests 30.03s, environment 0ms)[22m
-
+ ✓ src/tests/auth.test.ts (8 tests) 1104ms
+ ✓ src/tests/inventory.test.ts (4 tests) 527ms
+ ✓ src/tests/vehicle.test.ts (7 tests) 520ms
+                                     
+ Test Files  3 passed (3)
+      Tests  19 passed (19)
+   Start at  22:36:48     
+   Duration  2.93s (transform 32ms, setup 0ms, import 435ms, tests 2.15s, environment 0ms)
+                 
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s             
+-------------------|---------|----------|---------|---------|-------------------------------
+All files          |   79.76 |    69.73 |   92.85 |   82.91 |                               
+ src               |     100 |      100 |     100 |     100 |                               
+  app.ts           |     100 |      100 |     100 |     100 |                               
+ src/middleware    |   81.25 |       80 |     100 |   81.25 |                               
+  auth.ts          |   81.25 |       80 |     100 |   81.25 | 14,19,27                      
+ src/models        |     100 |      100 |     100 |     100 |                               
+  User.ts          |     100 |      100 |     100 |     100 |                               
+  Vehicle.ts       |     100 |      100 |     100 |     100 |                               
+ src/routes        |   78.16 |    68.18 |   91.66 |   81.81 |                               
+  authRoutes.ts    |   76.71 |    70.58 |      80 |   76.71 | ...70,105-106,112-129,147,185 
+  vehicleRoutes.ts |   79.71 |    65.62 |     100 |   88.13 | 14,37,48,59,70,104,121        
+-------------------|---------|----------|---------|---------|-------------------------------
