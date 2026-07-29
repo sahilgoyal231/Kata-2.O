@@ -13,6 +13,19 @@ A full-stack web application designed for car dealerships to manage their invent
 - Node.js (v18+)
 - MongoDB Atlas cluster URL
 
+## Screenshots
+
+*(Please replace these placeholders with actual screenshots of your running application before submitting!)*
+
+### Login Screen
+![Login Screen](./docs/screenshots/login.png)
+
+### Customer Dashboard
+![Customer Dashboard](./docs/screenshots/dashboard.png)
+
+### Admin Inventory Manager
+![Admin Dashboard](./docs/screenshots/admin.png)
+
 ## Setup Instructions
 
 ### Backend Setup
