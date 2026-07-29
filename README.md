@@ -33,10 +33,11 @@ A full-stack web application designed for car dealerships to manage their invent
 **Tools Used**: Antigravity (Google Deepmind)
 
 **How I used them**:
-- **Architecture & Scaffolding**: I used the AI assistant to bootstrap the React frontend with Vite and Tailwind, and to set up the Node.js/Express backend with Mongoose.
-- **UI/UX Design**: I relied heavily on the AI to design a modern, glassmorphism-inspired aesthetic with dynamic floating background orbs and a responsive layout.
-- **Authentication Flow**: The AI implemented the JWT-based authentication system and synchronized the React state to ensure the Navbar updates instantly upon login/logout without page refreshes.
-- **Debugging**: I used the AI to resolve Mongoose deprecation warnings and troubleshoot styling opacity issues where background effects were being hidden.
+- **Architecture & Scaffolding**: I used Antigravity to bootstrap the React frontend with Vite/Tailwind, and to set up the Node.js/Express backend with Mongoose.
+- **UI/UX Design**: I relied heavily on the AI to design a premium, glassmorphism-inspired aesthetic with dynamic floating background orbs and responsive Tailwind components.
+- **Advanced Authentication Flow**: The AI implemented a secure, industry-standard authentication system utilizing short-lived access tokens (via Axios interceptors) and long-lived `HttpOnly`, `SameSite=Lax` refresh cookies.
+- **Testing & TDD**: I asked the AI to write comprehensive unit tests (`vitest`, `supertest`) to achieve >80% coverage for the backend logic and configure parallel execution boundaries.
+- **Debugging**: I used the AI to resolve Mongoose deprecation warnings, troubleshoot Tailwind utility order issues (`bg-gradient-brand`), and fix race-condition bottlenecks in our testing framework.
 
 **Reflection**: 
-Using AI as a co-pilot drastically accelerated the development process. It allowed me to focus on high-level architecture and user experience while the AI handled boilerplate generation, complex CSS animations, and repetitive API endpoint wiring. It was particularly effective in instantly diagnosing and fixing state management edge cases in React.
+Using AI as a co-pilot drastically accelerated the development process. It allowed me to focus on high-level architecture and user experience while the AI handled boilerplate generation, complex CSS animations, advanced HTTP cookie security headers, and repetitive API endpoint wiring. It was particularly effective in instantly diagnosing and fixing state management edge cases in React and deeply nested testing race-conditions.
