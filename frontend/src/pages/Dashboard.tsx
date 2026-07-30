@@ -17,26 +17,28 @@ const Dashboard = () => {
   
   const [_, setLocation] = useLocation();
 
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          setLocation('/login');
-          return;
-        }
-
-        const response = await api.get('/api/vehicles');
-        const data = response.data;
-
-        setVehicles(Array.isArray(data) ? data : []);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+  const fetchVehicles = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setLocation('/login');
+        return;
       }
-    };
 
+      const response = await api.get('/api/vehicles');
+      const data = response.data;
+
+      setVehicles(Array.isArray(data) ? data : []);
+      setError('');
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchVehicles();
   }, [setLocation]);
 
@@ -164,7 +166,7 @@ const Dashboard = () => {
           <div className="bg-red-50 border border-red-200 rounded-2xl p-6 text-center shadow-sm">
             <p className="text-red-600 mb-4">{error}</p>
             <button 
-              onClick={() => window.location.reload()}
+              onClick={fetchVehicles}
               className="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-lg transition-colors font-medium"
             >
               Retry
