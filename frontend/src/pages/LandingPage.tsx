@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 
 const LandingPage = () => {
   return (
@@ -32,11 +32,11 @@ const LandingPage = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/register" className="group flex items-center gap-2 bg-gradient-brand px-8 py-4 rounded-full font-bold text-lg transition-all">
+            <Link href="/register" className="group flex items-center gap-2 bg-gradient-brand px-8 py-4 rounded-full font-bold text-lg transition-all">
               Join the Platform
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/login" className="px-8 py-4 rounded-full font-bold text-lg border border-incubyte-teal text-incubyte-teal hover:bg-incubyte-teal/5 bg-white transition-colors">
+            <Link href="/login" className="px-8 py-4 rounded-full font-bold text-lg border border-incubyte-teal text-incubyte-teal hover:bg-incubyte-teal/5 bg-white transition-colors">
               Access Dealer Portal
             </Link>
           </div>
