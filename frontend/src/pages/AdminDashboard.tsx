@@ -138,7 +138,7 @@ const AdminDashboard = () => {
             <h1 className="text-4xl font-serif font-black mb-2 text-[#202020]">Dealership Admin</h1>
             <p className="text-gray-500 font-medium">Manage vehicle inventory, stock, and pricing.</p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <button 
               onClick={fetchVehicles} 
               className="p-3 rounded-xl bg-white border border-gray-200 hover:bg-gray-50 transition-colors text-gray-500 hover:text-incubyte-teal shadow-sm"
