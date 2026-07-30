@@ -171,7 +171,7 @@ const AdminDashboard = () => {
               <Loader2 className="w-10 h-10 animate-spin" />
             </div>
           ) : (
-            <table className="w-full text-left border-collapse">
+            <table className="w-full min-w-[800px] text-left border-collapse">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200">
                   <th className="p-5 text-sm font-bold text-gray-600 uppercase tracking-wide">Vehicle</th>
