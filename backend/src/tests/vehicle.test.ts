@@ -135,6 +135,29 @@ describe('Vehicle Endpoints', () => {
     });
   });
 
+  describe('GET /api/vehicles/:id', () => {
+    it('should return a specific vehicle by ID', async () => {
+      const vehicle = await Vehicle.create({ make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3, year: 2024, powertrain: 'Gasoline', imageUrl: 'test.jpg' });
+
+      const res = await request(app)
+        .get(`/api/vehicles/${vehicle._id}`)
+        .set('Authorization', `Bearer ${customerToken}`);
+
+      expect(res.status).toBe(200);
+      expect(res.body.make).toBe('Honda');
+    });
+
+    it('should return 404 if vehicle not found', async () => {
+      const fakeId = new mongoose.Types.ObjectId();
+      const res = await request(app)
+        .get(`/api/vehicles/${fakeId}`)
+        .set('Authorization', `Bearer ${customerToken}`);
+
+      expect(res.status).toBe(404);
+      expect(res.body.message).toBe('Vehicle not found');
+    });
+  });
+
   describe('PUT /api/vehicles/:id', () => {
     it('should allow admin to update a vehicle', async () => {
       const vehicle = await Vehicle.create({ make: 'Honda', model: 'Civic', category: 'Sedan', price: 22000, quantity: 3, year: 2024, powertrain: 'Gasoline', imageUrl: 'test.jpg' });
