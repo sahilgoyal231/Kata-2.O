@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight, Lock, Mail } from 'lucide-react';
-import { useLocation } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import toast from 'react-hot-toast';
 import api from '../utils/axiosInstance';
 
@@ -106,9 +106,9 @@ const Login = () => {
 
           <p className="mt-8 text-center text-sm text-gray-500">
             Don't have an account?{' '}
-            <a href="/register" className="font-bold text-incubyte-teal hover:text-incubyte-dark transition-colors">
+            <Link href="/register" className="font-bold text-incubyte-teal hover:text-incubyte-dark transition-colors">
               Request access
-            </a>
+            </Link>
           </p>
         </div>
       </div>
