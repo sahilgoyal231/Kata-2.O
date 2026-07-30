@@ -38,6 +38,17 @@ router.get('/search', authenticate, async (req: AuthRequest, res: Response): Pro
   }
 });
 
+// Get a single vehicle by ID
+router.get('/:id', authenticate, async (req: AuthRequest, res: Response): Promise<any> => {
+  try {
+    const vehicle = await Vehicle.findById(req.params.id);
+    if (!vehicle) return res.status(404).json({ message: 'Vehicle not found' });
+    res.json(vehicle);
+  } catch (err: any) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Create a vehicle (Admin)
 router.post('/', authenticate, authorizeAdmin, async (req: AuthRequest, res: Response): Promise<any> => {
   try {
