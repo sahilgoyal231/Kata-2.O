@@ -196,7 +196,7 @@ const AdminDashboard = () => {
                     <td className="p-5 text-gray-600 font-medium hidden md:table-cell">{v.category}</td>
                     <td className="p-5 font-bold text-incubyte-teal">${v.price.toLocaleString()}</td>
                     <td className="p-5">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold border ${v.quantity > 0 ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-red-50 text-red-600 border-red-100'}`}>
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold border whitespace-nowrap ${v.quantity > 0 ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-red-50 text-red-600 border-red-100'}`}>
                         {v.quantity > 0 ? `${v.quantity} Available` : 'Out of Stock'}
                       </span>
                     </td>
