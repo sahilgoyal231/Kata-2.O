@@ -75,14 +75,15 @@ Follow these steps to run the complete platform locally on your machine.
 
 ## 🤖 My AI Usage
 
-**Tools Used**: Antigravity (Google Deepmind)
+### Which AI Tools I Used
+- **Antigravity (Google Deepmind)**: Used as the primary intelligent agent and coding co-pilot for full-stack implementation.
+- **Gemini**: Used to brainstorm API endpoint structures and architecture design patterns.
 
-**How I used them**:
-- **Architecture & Scaffolding**: I used Antigravity to bootstrap the React frontend with Vite/Tailwind, and to set up the robust Node.js/Express backend with Mongoose.
-- **UI/UX Design**: I relied heavily on the AI to design a premium, glassmorphism-inspired aesthetic with dynamic floating background orbs and highly responsive Tailwind components. The AI was instrumental in refining the design system to mimic high-end brands like Porsche and Tesla.
-- **Routing & SPA Integrity**: The AI diagnosed and fixed hard-refresh leaks in our authentication flow, ensuring that the `wouter` implementation maintained a flawless 100% Single-Page Application state.
-- **Testing & TDD**: I asked the AI to simulate a strict "Red-Green-Refactor" workflow, writing comprehensive unit tests (`vitest`, `supertest`, `mongodb-memory-server`) to achieve >90% coverage for the backend logic and configure isolated database environments.
-- **Debugging**: I used the AI to resolve Mongoose deprecation warnings, troubleshoot complex Tailwind utility wrapping on responsive grid layouts, and eliminate port-binding conflicts in our ephemeral test runner.
+### How I Used Them
+- **Brainstorming API Structures:** I used Gemini to brainstorm the optimal RESTful API endpoint structures for the `/api/vehicles` and `/api/auth` routes.
+- **Generating Unit Tests:** I asked Antigravity to simulate a TDD workflow and generate comprehensive unit tests (`vitest`, `supertest`) for the service layer and backend logic.
+- **Architecture & Scaffolding:** I used Antigravity to bootstrap the React frontend with Vite/Tailwind, and to set up the robust Node.js/Express backend with Mongoose.
+- **UI/UX Design:** I relied heavily on the AI to design a premium, glassmorphism-inspired aesthetic with dynamic floating background orbs and highly responsive Tailwind components.
 
-**Reflection**: 
+### Reflection on AI Impact
 Using AI as a co-pilot drastically accelerated the development process. It allowed me to focus on high-level architecture, user experience, and feature mapping while the AI handled boilerplate generation, complex CSS micro-animations, and repetitive API endpoint wiring. It was particularly effective in instantly auditing the platform against strict client rubrics and guaranteeing 100% compliance across both UI design patterns and backend REST paradigms.
